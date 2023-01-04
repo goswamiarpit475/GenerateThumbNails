@@ -24,7 +24,7 @@ namespace GenerateThumbNails
         private void button1_Click(object sender, EventArgs e)
         {
             //VideoInfo v= FFMpegSharp.VideoInfo.FromPath("");
-            /*string inputFile = @"C:\\Users\\ahc\\Downloads\\SoundID\\sample_video.mp4";
+           /* string inputFile = @"C:\\Users\\ahc\\Downloads\\SoundID\\sample_video.mp4";
             FileInfo output = new FileInfo("C:\\Users\\ahc\\Downloads\\SoundID\\t.png");
 
             var video = VideoInfo.FromPath(inputFile);
@@ -36,12 +36,11 @@ namespace GenerateThumbNails
                     new Size(200, 400),
                     TimeSpan.FromSeconds(600)
                 );*/
-
             GetThumbnail("", "");
         }
         public static void GetThumbnail(string video, string thumbnail)
         {
-            var cmd = "C:\\ffmpeg\\bin\\ffmpeg  -i C:\\Users\\ahc\\Downloads\\SoundID\\sample_video.mp4 -ss 00:10:00.000 -vf 'scale=320:320:force_original_aspect_ratio=decrease' -vframes 1 C:\\Users\\ahc\\Downloads\\SoundID\\output.png";
+            var cmd = "C:\\ffmpeg\\bin\\ffmpeg  -i C:\\Users\\ahc\\Downloads\\SoundID\\sample_video.mp4 -ss 00:10:00.000 -vf scale=320:320:force_original_aspect_ratio=decrease -vframes 1 C:\\Users\\ahc\\Downloads\\SoundID\\output.png";
 
             var startInfo = new ProcessStartInfo
             {
@@ -56,7 +55,8 @@ namespace GenerateThumbNails
             };
 
             process.Start();
-            process.WaitForExit(5*60*1000);
+            process.WaitForExit();
+            // process.WaitForExit(5*60*1000);
 
             //return LoadImage(thumbnail);
         }
