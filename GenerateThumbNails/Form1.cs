@@ -51,10 +51,10 @@ namespace GenerateThumbNails
                 string[] x = s.Split('_');
                 vidPath = vidMainDir + "\\" + x[0]+".mp4";
                 thumbTime = x[1].Replace("\r", "");
-                thumbNail = thumbPath+"\\"+x[0].Replace('/', '_').Replace("\r","")+".png";
+                thumbNail = thumbPath+"\\"+x[0].Replace('/', '_').Replace("\r","")+"_"+ thumbTime.Replace(':','_') + ".png";
                 GetThumbnail(vidPath, thumbNail, thumbTime);
                 lblStatus.Text = i.ToString() + " of " + vidPaths.Count().ToString()+"...";
-                if (i >3 )
+                if (i >10 )
                 {
                     break;
                 }
@@ -63,7 +63,8 @@ namespace GenerateThumbNails
         }
         public void GetThumbnail(string video, string thumbnail,string thumbtime)
         {
-            string cmd = ffmpegPath+" -i \""+video+"\" -ss "+thumbtime+" -vf scale=320:320:force_original_aspect_ratio=decrease -vframes 1 \""+thumbnail+"\"";
+            string cmd = ffmpegPath+" -i \""+video+"\" -ss "+thumbtime+" -vframes 1 \""+thumbnail+"\"";
+            //string cmd = ffmpegPath + " -i \"" + video + "\" -ss " + thumbtime + " -vf scale=320:320:force_original_aspect_ratio=decrease -vframes 1 \"" + thumbnail + "\"";
 
             var startInfo = new ProcessStartInfo
             {
